@@ -31,6 +31,12 @@ export default class{
     }
 
 
+    // resize
+    resize(){
+        
+    }
+
+
     // animate
     animate(){
 
