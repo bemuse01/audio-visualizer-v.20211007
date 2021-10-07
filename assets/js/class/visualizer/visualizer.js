@@ -57,6 +57,9 @@ export default class{
             }
         }
     }
+    initGPGPU(){
+        
+    }
 
 
     // add
