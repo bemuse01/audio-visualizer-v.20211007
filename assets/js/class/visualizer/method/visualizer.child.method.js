@@ -6,10 +6,10 @@ export default {
         const wid = w * width
         const hei = h * height
 
-        for(let i = 0; i < h; i++){
+        for(let i = 0; i < w; i++){
             const x = -wid / 2 + i * width
 
-            for(let j = 0; j < w; j++){
+            for(let j = 0; j < h; j++){
                 const y = -hei / 2 + j * height
 
                 position.push(x, y, 0)
