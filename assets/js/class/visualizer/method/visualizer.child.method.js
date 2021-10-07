@@ -1,16 +1,21 @@
 export default {
-    createAttribute({width, height, w, h}){
+    createAttribute({width, height, w, h, radius}){
         const coord = []
         const position = []
         
         const wid = w * width
         const hei = h * height
+        
+        const deg = 360 / w;
 
         for(let i = 0; i < w; i++){
-            const x = -wid / 2 + i * width
+            // const x = -wid / 2 + i * width
+      
 
             for(let j = 0; j < h; j++){
-                const y = -hei / 2 + j * height
+                // const y = -hei / 2 + j * height
+                const x = Math.cos(deg * i * RADIAN) * (radius + j) 
+                const y = Math.sin(deg * i * RADIAN) * (radius + j)
 
                 position.push(x, y, 0)
                 coord.push(i, j)
@@ -21,10 +26,15 @@ export default {
     },
     fillPositionTexture(texture){
         const {data, width, height} = texture.image
+        
+        const deg = 360 / width;
 
         for(let j = 0; j < height; j++){
             for(let i = 0; i < width; i++){
                 const index = (j * width + i) * 4
+
+                // const x = Math.cos(deg * i * RADIAN) * (300 + j)
+                // const y = Math.sin(deg * i * RADIAN) * (300 + j)
 
                 // position x
                 data[index] = 0
@@ -43,13 +53,9 @@ export default {
             for(let i = 0; i < width; i++){
                 const index = (j * width + i) * 4
 
-                // x velocity
                 data[index] = Math.random() * vel - vel / 2
-                // y velocity
                 data[index + 1] = Math.random() * vel - vel / 2
-                // life (opacity)
                 data[index + 2] = Math.random()
-                // life velocity
                 data[index + 3] = 0.015
             }
         }

@@ -1,7 +1,8 @@
 export default {
-    w: 500,
-    h: 100,
+    w: 600,
+    h: 50,
     width: 2,
-    height: 0.25,
+    height: 0.5,
+    radius: 300,
     color: 0xffffff
 }

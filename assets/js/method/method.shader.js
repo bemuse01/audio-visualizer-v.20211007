@@ -25,6 +25,15 @@ export default {
             }
         `
     },
+    getCircleCoord(){
+        return `
+            vec2 getCircleCoord(float deg, float radius){
+                float x = radius * cos(deg);
+                float y = radius * sin(deg);
+                return vec2(x, y);
+            }
+        `
+    },
     rand(){
         return `
             float rand(vec2 co){
