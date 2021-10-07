@@ -14,8 +14,8 @@ export default {
 
             for(let j = 0; j < h; j++){
                 // const y = -hei / 2 + j * height
-                const x = Math.cos(deg * i * RADIAN) * (radius + j) 
-                const y = Math.sin(deg * i * RADIAN) * (radius + j)
+                const x = Math.cos(deg * i * RADIAN) * (radius + j * height) 
+                const y = Math.sin(deg * i * RADIAN) * (radius + j * height)
 
                 position.push(x, y, 0)
                 coord.push(i, j)
