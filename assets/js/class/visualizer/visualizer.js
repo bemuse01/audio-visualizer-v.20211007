@@ -1,10 +1,12 @@
 import * as THREE from '../../lib/three.module.js'
+import {GPUComputationRenderer} from '../../lib/GPUComputationRenderer.js'
 import PUBLIC_METHOD from '../../method/method.js'
 import CHILD from './build/visualizer.child.build.js'
+import CHILD_PARAM from './param/visualizer.child.param.js'
 
 
 export default class{
-    constructor(app){
+    constructor({app}){
         this.param = {
             fov: 60,
             near: 0.1,
@@ -25,6 +27,7 @@ export default class{
 
     // init
     init(app){
+        this.initGPGPU(app)
         this.initGroup()
         this.initRenderObject()
         this.create(app)
@@ -57,8 +60,8 @@ export default class{
             }
         }
     }
-    initGPGPU(){
-        
+    initGPGPU({renderer}){
+        this.gpuCompute = new GPUComputationRenderer(CHILD_PARAM.w, CHILD_PARAM.h, renderer)
     }
 
 
@@ -76,13 +79,17 @@ export default class{
             const instance = this.modules[module]
             const group = this.group[module]
 
-            this.comp[module] = new instance({group, size: this.size})
+            this.comp[module] = new instance({group, size: this.size, gpuCompute: this.gpuCompute})
         }
+
+        this.gpuCompute.init()
     }
 
 
     // animate
     animate({app, audio}){
+        this.gpuCompute.compute()
+
         this.render(app)
         this.animateObject(audio)
     }
