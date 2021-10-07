@@ -1,3 +1,5 @@
+import * as THREE from '../../../lib/three.module.js'
+
 export default {
     createAttribute({width, height, w, h, radius}){
         const coord = []
@@ -27,7 +29,11 @@ export default {
     fillPositionTexture(texture){
         const {data, width, height} = texture.image
         
-        const deg = 360 / width;
+        const hw = width / 2
+        const hh = height / 2
+
+        const deg = 360 / width
+
 
         for(let j = 0; j < height; j++){
             for(let i = 0; i < width; i++){
@@ -40,11 +46,13 @@ export default {
                 data[index] = 0
                 // position y
                 data[index + 1] = 0
-                // position z
-                data[index + 2] = 0
-                data[index + 3] = 0
+                data[index + 2] = i < hw ? i : hw - i % hw
+                data[index + 3] = j
             }
         }
+    },
+    createNoiseParam(){
+
     },
     fillVelocityTexture(texture, {vel}){
         const {data, width, height} = texture.image

@@ -24,6 +24,8 @@ export default class{
         // ])
 
         // const points = curve.getPoints(100)
+
+        // console.log(points)
     }
 
     // gpgpu

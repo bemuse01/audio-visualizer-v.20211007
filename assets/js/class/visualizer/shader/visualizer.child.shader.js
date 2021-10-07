@@ -35,8 +35,8 @@ export default {
 
             vec4 pos = texture(tPosition, uv);
 
-            float x = snoise3D(vec3(uv * 1.25, uTime * 0.0005)) * 50.0;
-            float y = snoise3D(vec3(uv * 1.75, uTime * 0.0005)) * 50.0;
+            float x = snoise3D(vec3(pos.zw * 0.01, uTime * 0.0005)) * 50.0;
+            float y = snoise3D(vec3(pos.zw * 0.01, uTime * 0.0005)) * 50.0;
 
             pos.xy = vec2(x, y);
 
