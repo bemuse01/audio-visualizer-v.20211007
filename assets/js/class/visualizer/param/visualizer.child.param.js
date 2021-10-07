@@ -1,6 +1,6 @@
 export default {
     w: 600,
-    h: 50,
+    h: 60,
     width: 2,
     height: 0.6,
     radius: 300,
