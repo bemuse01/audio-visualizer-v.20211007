@@ -15,7 +15,15 @@ export default class{
     init(group){
         this.initGPGPU()
         this.create()
-        this.add(group)        
+        this.add(group)
+
+        // const curve = new THREE.SplineCurve([
+        //     new THREE.Vector2(-100, -100),
+        //     new THREE.Vector2(0, 0),
+        //     new THREE.Vector2(100, -100)
+        // ])
+
+        // const points = curve.getPoints(100)
     }
 
     // gpgpu
