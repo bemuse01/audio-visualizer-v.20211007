@@ -5,22 +5,22 @@ export default {
         vertex: `
             attribute vec2 aCoord;
             attribute vec3 aPosition;
-            attribute float aOpacity;
+            // attribute float aOpacity;
 
             uniform sampler2D uPosition;
-            uniform sampler2D uVelocity;
+            // uniform sampler2D uVelocity;
 
             varying float vOpacity;
 
             void main(){
                 vec4 pos = texelFetch(uPosition, ivec2(aCoord), 0);
-                vec4 vel = texelFetch(uVelocity, ivec2(aCoord), 0);
+                // vec4 vel = texelFetch(uVelocity, ivec2(aCoord), 0);
                 vec3 nPosition = position;
 
                 nPosition.xy += aPosition.xy + pos.xy;
 
                 // vOpacity = aOpacity;
-                vOpacity = vel.x;
+                // vOpacity = vel.x;
 
                 gl_Position = projectionMatrix * modelViewMatrix * vec4(nPosition, 1.0);
             }
@@ -29,11 +29,11 @@ export default {
             uniform vec3 uColor;
             uniform float uOpacity;
 
-            varying float vOpacity;
+            // varying float vOpacity;
 
             void main(){
-                gl_FragColor = vec4(uColor, vOpacity);
-                // gl_FragColor = vec4(uColor, uOpacity);
+                // gl_FragColor = vec4(uColor, vOpacity);
+                gl_FragColor = vec4(uColor, uOpacity);
             }
         `
     },

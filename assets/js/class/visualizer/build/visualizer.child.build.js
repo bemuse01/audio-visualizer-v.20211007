@@ -36,11 +36,11 @@ export default class{
 
     // set texutre
     createTexture(){
-        this.createVelocityTexture()
+        // this.createVelocityTexture()
         this.createPositionTexture()
     }
     initTexture(){
-        this.initVelocityTexture()
+        // this.initVelocityTexture()
         this.initPositionTexture()
     }
 
@@ -167,6 +167,6 @@ export default class{
         // this.velocityUniforms['uTime'].value = time
 
         this.mesh.material.uniforms['uPosition'].value = this.gpuCompute.getCurrentRenderTarget(this.positionVariable).texture
-        this.mesh.material.uniforms['uVelocity'].value = this.gpuCompute.getCurrentRenderTarget(this.velocityVariable).texture
+        // this.mesh.material.uniforms['uVelocity'].value = this.gpuCompute.getCurrentRenderTarget(this.velocityVariable).texture
     }
 }
