@@ -34,7 +34,6 @@ export default {
 
         const deg = 360 / width
 
-
         for(let j = 0; j < height; j++){
             for(let i = 0; i < width; i++){
                 const index = (j * width + i) * 4
@@ -46,13 +45,11 @@ export default {
                 data[index] = 0
                 // position y
                 data[index + 1] = 0
-                data[index + 2] = i < hw ? i : hw - i % hw
+                data[index + 2] = i < hw ? i : hw - (i % hw + 1)
                 data[index + 3] = j
+                if(j === 0) console.log(i < hw ? i : hw - (i % hw + 1))
             }
         }
-    },
-    createNoiseParam(){
-
     },
     fillVelocityTexture(texture, {vel}){
         const {data, width, height} = texture.image

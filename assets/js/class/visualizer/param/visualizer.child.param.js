@@ -4,5 +4,8 @@ export default {
     width: 2,
     height: 0.6,
     radius: 300,
-    color: 0xffffff
+    color: 0xffffff,
+    opacity: 1.0,
+    nRd: 0.01,
+    tRd: 0.0005
 }

@@ -72,6 +72,8 @@ export default class{
         this.positionUniforms = this.positionVariable.material.uniforms
         
         this.positionUniforms['uTime'] = {value: null}
+        this.positionUniforms['uTrd'] = {value: PARAM.tRd}
+        this.positionUniforms['uNrd'] = {value: PARAM.nRd}
     }
     
 
@@ -129,7 +131,8 @@ export default class{
             transparent: true,
             uniforms: {
                 uColor: {value: new THREE.Color(PARAM.color)},
-                uPosition: {value: null}
+                uPosition: {value: null},
+                uOpacity: {value: PARAM.opacity}
             }
         })
     }

@@ -19,14 +19,17 @@ export default {
         `,
         fragment: `
             uniform vec3 uColor;
+            uniform float uOpacity;
 
             void main(){
-                gl_FragColor = vec4(1.0);
+                gl_FragColor = vec4(uColor, uOpacity);
             }
         `
     },
     position: `
         uniform float uTime;
+        uniform float uTrd;
+        uniform float uNrd;
 
         ${SHADER_METHOD.snoise3D()}
 
@@ -35,8 +38,8 @@ export default {
 
             vec4 pos = texture(tPosition, uv);
 
-            float x = snoise3D(vec3(pos.zw * 0.01, uTime * 0.0005)) * 50.0;
-            float y = snoise3D(vec3(pos.zw * 0.01, uTime * 0.0005)) * 50.0;
+            float x = snoise3D(vec3(pos.zw * uNrd, uTime * uTrd)) * 50.0;
+            float y = snoise3D(vec3(pos.zw * uNrd, uTime * uTrd)) * 50.0;
 
             pos.xy = vec2(x, y);
 
