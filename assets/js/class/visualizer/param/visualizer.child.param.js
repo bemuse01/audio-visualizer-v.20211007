@@ -1,7 +1,8 @@
 export default {
     w: 600,
     h: 60,
-    width: 2,
+    width: Math.PI * 2 * 300 / 600,
+    // width: 2,
     height: 0.6,
     radius: 300,
     color: 0xffffff,
