@@ -36,11 +36,11 @@ export default class{
 
     // set texutre
     createTexture(){
-        // this.createVelocityTexture()
+        this.createVelocityTexture()
         this.createPositionTexture()
     }
     initTexture(){
-        // this.initVelocityTexture()
+        this.initVelocityTexture()
         this.initPositionTexture()
     }
 
@@ -48,14 +48,20 @@ export default class{
     createVelocityTexture(){
         const velocity = this.gpuCompute.createTexture()
 
-        METHOD.fillVelocityTexture(velocity, PARAM)
+        METHOD.fillVelocityTexture(velocity)
 
         this.velocityVariable = this.gpuCompute.addVariable('tVelocity', SHADER.velocity, velocity)
     }
     initVelocityTexture(){
         this.gpuCompute.setVariableDependencies(this.velocityVariable, [this.velocityVariable, this.positionVariable])
 
-        // this.velocityUniforms = this.velocityVariable.material.uniforms
+        this.velocityUniforms = this.velocityVariable.material.uniforms
+
+        // this.velocityUniforms['uTime'] = {value: null}
+        // this.velocityUniforms['uTrd'] = {value: PARAM.tRd}
+        // this.velocityUniforms['uNrd'] = {value: PARAM.nRd}
+        this.velocityUniforms['uRange'] = {value: PARAM.range}
+        this.velocityUniforms['uStrength'] = {value: PARAM.strength}
     }
 
     // position texture
@@ -137,6 +143,7 @@ export default class{
             uniforms: {
                 uColor: {value: new THREE.Color(PARAM.color)},
                 uPosition: {value: null},
+                uVelocity: {value: null},
                 uOpacity: {value: PARAM.opacity}
             }
         })
@@ -157,6 +164,9 @@ export default class{
         this.positionUniforms['uTime'].value = time
         this.positionUniforms['uAudio'].value = avg
 
+        // this.velocityUniforms['uTime'].value = time
+
         this.mesh.material.uniforms['uPosition'].value = this.gpuCompute.getCurrentRenderTarget(this.positionVariable).texture
+        this.mesh.material.uniforms['uVelocity'].value = this.gpuCompute.getCurrentRenderTarget(this.velocityVariable).texture
     }
 }

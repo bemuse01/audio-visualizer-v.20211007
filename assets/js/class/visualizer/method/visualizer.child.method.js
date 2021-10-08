@@ -58,17 +58,17 @@ export default {
             }
         }
     },
-    fillVelocityTexture(texture, {vel}){
+    fillVelocityTexture(texture){
         const {data, width, height} = texture.image
 
         for(let j = 0; j < height; j++){
             for(let i = 0; i < width; i++){
                 const index = (j * width + i) * 4
 
-                data[index] = Math.random() * vel - vel / 2
-                data[index + 1] = Math.random() * vel - vel / 2
-                data[index + 2] = Math.random()
-                data[index + 3] = 0.015
+                data[index] = 0
+                data[index + 1] = 0
+                data[index + 2] = 0
+                data[index + 3] = 0
             }
         }
     },

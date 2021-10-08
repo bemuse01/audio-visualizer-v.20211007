@@ -8,16 +8,19 @@ export default {
             attribute float aOpacity;
 
             uniform sampler2D uPosition;
+            uniform sampler2D uVelocity;
 
             varying float vOpacity;
 
             void main(){
                 vec4 pos = texelFetch(uPosition, ivec2(aCoord), 0);
+                vec4 vel = texelFetch(uVelocity, ivec2(aCoord), 0);
                 vec3 nPosition = position;
 
                 nPosition.xy += aPosition.xy + pos.xy;
 
-                vOpacity = aOpacity;
+                // vOpacity = aOpacity;
+                vOpacity = vel.x;
 
                 gl_Position = projectionMatrix * modelViewMatrix * vec4(nPosition, 1.0);
             }
@@ -30,6 +33,7 @@ export default {
 
             void main(){
                 gl_FragColor = vec4(uColor, vOpacity);
+                // gl_FragColor = vec4(uColor, uOpacity);
             }
         `
     },
@@ -56,6 +60,22 @@ export default {
         }
     `,
     velocity: `
-        
+        uniform float uRange;
+        uniform float uStrength;
+
+        ${SHADER_METHOD.executeNormalizing()}
+
+        void main(){
+            vec2 uv = gl_FragCoord.xy / resolution.xy;
+
+            vec4 pos = texture(tPosition, uv);
+            vec4 vel = texture(tVelocity, uv);
+
+            float o = executeNormalizing(pos.x, 0.0, 1.0, -uRange * uStrength, uRange * uStrength);
+
+            vel.x = o;
+
+            gl_FragColor = vel;
+        }
     `
 }
