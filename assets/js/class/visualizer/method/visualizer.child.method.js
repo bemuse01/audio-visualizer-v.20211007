@@ -47,7 +47,6 @@ export default {
                 data[index + 1] = 0
                 data[index + 2] = i < hw ? i : hw - (i % hw + 1)
                 data[index + 3] = j
-                if(j === 0) console.log(i < hw ? i : hw - (i % hw + 1))
             }
         }
     },
@@ -64,5 +63,9 @@ export default {
                 data[index + 3] = 0.015
             }
         }
+    },
+    createAudioData(audioData, {strength}){
+        if(!audioData) return strength * 0.01
+        return [...audioData].map(e => e / 255 <= 0 ? strength * 0.001 : e / 255).reduce((a, b) => a + b) / audioData.length * strength
     }
 }

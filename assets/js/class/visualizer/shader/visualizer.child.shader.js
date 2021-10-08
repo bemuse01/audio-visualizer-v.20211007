@@ -30,6 +30,8 @@ export default {
         uniform float uTime;
         uniform float uTrd;
         uniform float uNrd;
+        uniform float uAudio;
+        uniform float uRange;
 
         ${SHADER_METHOD.snoise3D()}
 
@@ -38,8 +40,8 @@ export default {
 
             vec4 pos = texture(tPosition, uv);
 
-            float x = snoise3D(vec3(pos.zw * uNrd, uTime * uTrd)) * 50.0;
-            float y = snoise3D(vec3(pos.zw * uNrd, uTime * uTrd)) * 50.0;
+            float x = snoise3D(vec3(pos.zw * uNrd, uTime * uTrd)) * uRange * uAudio;
+            float y = snoise3D(vec3(pos.zw * uNrd, uTime * uTrd)) * uRange * uAudio;
 
             pos.xy = vec2(x, y);
 

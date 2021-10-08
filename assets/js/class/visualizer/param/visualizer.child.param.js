@@ -7,5 +7,7 @@ export default {
     color: 0xffffff,
     opacity: 1.0,
     nRd: 0.01,
-    tRd: 0.0005
+    tRd: 0.001,
+    strength: 10,
+    range: 20
 }

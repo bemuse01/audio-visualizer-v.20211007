@@ -74,6 +74,8 @@ export default class{
         this.positionUniforms['uTime'] = {value: null}
         this.positionUniforms['uTrd'] = {value: PARAM.tRd}
         this.positionUniforms['uNrd'] = {value: PARAM.nRd}
+        this.positionUniforms['uAudio'] = {value: null}
+        this.positionUniforms['uRange'] = {value: PARAM.range}
     }
     
 
@@ -145,10 +147,12 @@ export default class{
 
 
     // animate
-    animate(){
+    animate({audioData}){
         const time = window.performance.now()
+        const avg = METHOD.createAudioData(audioData, PARAM)
 
         this.positionUniforms['uTime'].value = time
+        this.positionUniforms['uAudio'].value = avg
 
         this.mesh.material.uniforms['uPosition'].value = this.gpuCompute.getCurrentRenderTarget(this.positionVariable).texture
     }
