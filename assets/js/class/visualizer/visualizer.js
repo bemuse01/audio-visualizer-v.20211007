@@ -1,5 +1,10 @@
 import * as THREE from '../../lib/three.module.js'
 import {GPUComputationRenderer} from '../../lib/GPUComputationRenderer.js'
+import {EffectComposer} from '../../postprocess/EffectComposer.js'
+import {RenderPass} from '../../postprocess/RenderPass.js'
+import {ShaderPass} from '../../postprocess/ShaderPass.js'
+import {HorizontalBlurShader} from '../../postprocess/HorizontalBlurShader.js'
+import {VerticalBlurShader} from '../../postprocess/VerticalBlurShader.js'
 import PUBLIC_METHOD from '../../method/method.js'
 import CHILD from './build/visualizer.child.build.js'
 import CHILD_PARAM from './param/visualizer.child.param.js'
@@ -30,6 +35,7 @@ export default class{
         this.initGPGPU(app)
         this.initGroup()
         this.initRenderObject()
+        // this.initComposer(app)
         this.create(app)
         this.add()
     }
@@ -59,6 +65,32 @@ export default class{
                 h: PUBLIC_METHOD.getVisibleHeight(this.camera, 0)
             }
         }
+    }
+    initComposer({renderer}){
+        this.bloom = this.param.bloom
+
+        const {right, left, bottom, top} = this.element.getBoundingClientRect()
+        const width = right - left
+        const height = bottom - top
+        
+        this.composer = new EffectComposer(renderer)
+        this.composer.setSize(width, height)
+
+        const renderPass = new RenderPass(this.scene, this.camera)
+
+        // this.fxaa = new THREE.ShaderPass(THREE.FXAAShader)
+        // this.fxaa.uniforms['resolution'].value.set(1 / (width * RATIO), 1 / (height * RATIO))
+
+        const hblur = new ShaderPass(HorizontalBlurShader)
+
+        const vblur = new ShaderPass(VerticalBlurShader)
+        vblur.renderToScreen = true
+
+        this.composer.addPass(renderPass)
+        this.composer.addPass(hblur)
+        this.composer.addPass(vblur)
+
+        // this.composer.addPass(this.fxaa)
     }
     initGPGPU({renderer}){
         this.gpuCompute = new GPUComputationRenderer(CHILD_PARAM.w, CHILD_PARAM.h, renderer)
@@ -105,6 +137,16 @@ export default class{
 
         this.camera.lookAt(this.scene.position)
         app.renderer.render(this.scene, this.camera)
+
+        // app.renderer.autoClear = false
+        // app.renderer.clear()
+
+        // this.camera.layers.set(PROCESS)
+        // this.composer.render()
+
+        // app.renderer.clearDepth()
+        // this.camera.layers.set(NORMAL)
+        // app.renderer.render(this.scene, this.camera)
     }
     animateObject(audio){
         for(let i in this.comp){

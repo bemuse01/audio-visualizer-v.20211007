@@ -8,6 +8,6 @@ export default {
     opacity: 1.0,
     nRd: 0.01,
     tRd: 0.001,
-    strength: 10,
-    range: 20
+    strength: 22,
+    range: 10
 }

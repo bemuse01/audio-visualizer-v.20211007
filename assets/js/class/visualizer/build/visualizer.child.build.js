@@ -94,6 +94,8 @@ export default class{
         const material = this.createMaterial()
         this.mesh = new THREE.InstancedMesh(geometry, material, PARAM.w * PARAM.h)
 
+        // this.mesh.layers.set(PROCESS)
+
         // const width = PARAM.w * PARAM.width
         // const height = PARAM.h * PARAM.height
 
