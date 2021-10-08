@@ -115,10 +115,11 @@ export default class{
     createGeometry(){
         const geometry = new THREE.PlaneGeometry(PARAM.width, PARAM.height)
 
-        const {position, coord} = METHOD.createAttribute(PARAM)
+        const {position, coord, opacity} = METHOD.createAttribute(PARAM)
 
         geometry.setAttribute('aPosition', new THREE.InstancedBufferAttribute(position, 3))
         geometry.setAttribute('aCoord', new THREE.InstancedBufferAttribute(coord, 2))
+        geometry.setAttribute('aOpacity', new THREE.InstancedBufferAttribute(opacity, 1))
 
         return geometry
     }

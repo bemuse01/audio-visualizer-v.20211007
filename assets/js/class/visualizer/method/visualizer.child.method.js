@@ -4,9 +4,13 @@ export default {
     createAttribute({width, height, w, h, radius}){
         const coord = []
         const position = []
+        const opacity = []
         
         const wid = w * width
         const hei = h * height
+        
+        const hh = h / 2
+        const o = 1 / h
         
         const deg = 360 / w;
 
@@ -21,10 +25,12 @@ export default {
 
                 position.push(x, y, 0)
                 coord.push(i, j)
+                opacity.push(j < hh ? 1 - o * j : 1 - o * (hh - (j % hh + 1)))
+                // opacity.push(j === 0 ? 1 : 0)
             }
         }
 
-        return {position: new Float32Array(position), coord: new Float32Array(coord)}
+        return {position: new Float32Array(position), coord: new Float32Array(coord), opacity: new Float32Array(opacity)}
     },
     fillPositionTexture(texture){
         const {data, width, height} = texture.image
@@ -45,7 +51,9 @@ export default {
                 data[index] = 0
                 // position y
                 data[index + 1] = 0
+                // noise param x
                 data[index + 2] = i < hw ? i : hw - (i % hw + 1)
+                // noise param y
                 data[index + 3] = j
             }
         }
