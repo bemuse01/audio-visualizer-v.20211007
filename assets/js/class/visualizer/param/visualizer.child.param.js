@@ -6,9 +6,9 @@ export default {
     height: 0.6,
     radius: 300,
     color: 0xffffff,
-    opacity: 1.0,
+    opacity: 0.5,
     nRd: 0.01,
     tRd: 0.00175,
-    strength: 22,
+    strength: 25,
     range: 10
 }
