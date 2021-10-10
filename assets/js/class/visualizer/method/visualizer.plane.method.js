@@ -54,7 +54,7 @@ export default {
                 // noise param x
                 data[index + 2] = i < hw ? i : hw - (i % hw + 1)
                 // noise param y
-                data[index + 3] = j
+                data[index + 3] = height - j
             }
         }
     },
