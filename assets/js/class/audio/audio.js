@@ -3,7 +3,7 @@ export default class{
         this.param = {
             fft: 2 ** 14,
             smoothingTimeConstant: 0.85,
-            src: 'assets/src/竜とそばかすの姫 - 心のそばに.mp3'
+            src: 'assets/src/Belle - hanare banare no kimi e.mp3'
         }
 
         this.start = true

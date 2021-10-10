@@ -6,8 +6,8 @@ import {ShaderPass} from '../../postprocess/ShaderPass.js'
 import {HorizontalBlurShader} from '../../postprocess/HorizontalBlurShader.js'
 import {VerticalBlurShader} from '../../postprocess/VerticalBlurShader.js'
 import PUBLIC_METHOD from '../../method/method.js'
-import CHILD from './build/visualizer.child.build.js'
-import CHILD_PARAM from './param/visualizer.child.param.js'
+import PLANE from './build/visualizer.plane.build.js'
+import PLANE_PARAM from './param/visualizer.plane.param.js'
 
 
 export default class{
@@ -20,7 +20,7 @@ export default class{
         }
 
         this.modules = {
-            child: CHILD,
+            plane: PLANE,
         }
         this.group = {}
         this.comp = {}
@@ -93,7 +93,7 @@ export default class{
         // this.composer.addPass(this.fxaa)
     }
     initGPGPU({renderer}){
-        this.gpuCompute = new GPUComputationRenderer(CHILD_PARAM.w, CHILD_PARAM.h, renderer)
+        this.gpuCompute = new GPUComputationRenderer(PLANE_PARAM.w, PLANE_PARAM.h, renderer)
     }
 
 
