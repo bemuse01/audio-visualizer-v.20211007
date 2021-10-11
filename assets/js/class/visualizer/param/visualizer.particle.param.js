@@ -4,7 +4,7 @@ export default {
     size: 0.6,
     radius: 300,
     color: 0xffffff,
-    opacity: 0.5,
+    opacity: 0.65,
     nRd: 0.01,
     tRd: 0.00175,
     strength: 25,
