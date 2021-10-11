@@ -8,6 +8,8 @@ import {VerticalBlurShader} from '../../postprocess/VerticalBlurShader.js'
 import PUBLIC_METHOD from '../../method/method.js'
 import PLANE from './build/visualizer.plane.build.js'
 import PLANE_PARAM from './param/visualizer.plane.param.js'
+import PARTICLE from './build/visualizer.particle.build.js'
+import PARTICLE_PARAM from './param/visualizer.particle.param.js'
 
 
 export default class{
@@ -20,7 +22,8 @@ export default class{
         }
 
         this.modules = {
-            plane: PLANE,
+            // plane: PLANE,
+            particle: PARTICLE
         }
         this.group = {}
         this.comp = {}
@@ -93,7 +96,8 @@ export default class{
         // this.composer.addPass(this.fxaa)
     }
     initGPGPU({renderer}){
-        this.gpuCompute = new GPUComputationRenderer(PLANE_PARAM.w, PLANE_PARAM.h, renderer)
+        // this.gpuCompute = new GPUComputationRenderer(PLANE_PARAM.w, PLANE_PARAM.h, renderer)
+        this.gpuCompute = new GPUComputationRenderer(PARTICLE_PARAM.w, PARTICLE_PARAM.h, renderer)
     }
 
 
