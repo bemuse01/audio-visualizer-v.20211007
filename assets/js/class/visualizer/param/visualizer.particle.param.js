@@ -7,7 +7,9 @@ export default {
     opacity: 0.65,
     nRd: 0.01,
     tRd: 0.00175,
-    strength: 25,
+    strength: 20,
     range: 10,
-    smooth: 0.3
+    // smooth: 0.3
+    smooth: 0.15,
+    step: 20
 }
