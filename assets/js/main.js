@@ -7,6 +7,11 @@ new Vue({
     el: '#wrap',
     data(){
         return{
+            modules: {
+                app: APP,
+                audio: AUDIO,
+                visualizer: VISUALIZER
+            },
             element: {
                 progress: new PROGRESS()
             }
@@ -26,35 +31,23 @@ new Vue({
 
         // three
         initThree(){
-            OBJECT.app = new APP()
-
-            this.createObject()
+            for(const module in this.modules){
+                const instance = this.modules[module]
+                
+                OBJECT[module] = new instance(OBJECT)
+            }
         },
         resizeThree(){
-            const {app} = OBJECT
-
             for(let i in OBJECT){
                 if(!OBJECT[i].resize) continue
-                OBJECT[i].resize({app})
+                OBJECT[i].resize(OBJECT)
             }
         },
         renderThree(){
-            const {app, audio} = OBJECT
-            
             for(let i in OBJECT){
                 if(!OBJECT[i].animate) continue
-                OBJECT[i].animate({app, audio})
+                OBJECT[i].animate(OBJECT)
             }
-        },
-        createObject(){
-            this.createAudio()
-            this.createVisualizer()
-        },
-        createAudio(){
-            OBJECT.audio = new AUDIO()
-        },
-        createVisualizer(){
-            OBJECT.visualizer = new VISUALIZER(OBJECT)
         },
 
 

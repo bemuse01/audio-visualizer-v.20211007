@@ -90,7 +90,6 @@ export default class{
         const geometry = this.createGeometry()
         const material = this.createMaterial()
         this.mesh = new THREE.Points(geometry, material)
-        console.log(geometry, material)
     }
     createGeometry(){
         const geometry = new THREE.BufferGeometry()
