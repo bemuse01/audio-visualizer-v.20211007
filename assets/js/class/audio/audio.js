@@ -18,7 +18,6 @@ export default class{
     // init 
     init(){
         this.create()
-        document.addEventListener('click', () => {this.createContext(), this.play()}, false)
     }
 
 
@@ -32,7 +31,10 @@ export default class{
         this.audio.src = this.param.src
         this.audio.volume = 1.0
 
-        this.updateAudioCurrentTime()
+        this.audio.addEventListener('canplaythrough', () => {
+            document.addEventListener('click', () => {this.createContext(), this.play()}, false)
+            this.updateAudioCurrentTime()
+        })
     }
     createContext(){
         if(this.start){
